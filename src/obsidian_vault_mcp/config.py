@@ -5,6 +5,7 @@ from pathlib import Path
 VAULT_PATH = Path(os.environ.get("VAULT_PATH", os.path.expanduser("~/Obsidian/MyVault")))
 VAULT_MCP_TOKEN = os.environ.get("VAULT_MCP_TOKEN", "")
 VAULT_MCP_PORT = int(os.environ.get("VAULT_MCP_PORT", "8420"))
+VAULT_MCP_HOST = os.environ.get("VAULT_MCP_HOST", "")  # Public hostname (e.g. tunnel domain)
 
 # OAuth 2.0 client credentials (for Claude app integration)
 VAULT_OAUTH_CLIENT_ID = os.environ.get("VAULT_OAUTH_CLIENT_ID", "vault-mcp-client")
