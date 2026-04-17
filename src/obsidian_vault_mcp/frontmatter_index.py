@@ -26,6 +26,9 @@ class FrontmatterIndex:
 
     def start(self) -> None:
         """Walk all .md files, parse frontmatter, and start watching for changes."""
+        if self._observer is not None:
+            return
+
         t0 = time.monotonic()
         count = 0
 
