@@ -40,6 +40,15 @@ def _cleanup_codes():
         del _auth_codes[k]
 
 
+async def oauth_protected_resource(request: Request) -> JSONResponse:
+    """RFC 9728 protected resource metadata — tells clients the resource URL and its auth server."""
+    base_url = str(request.base_url).rstrip("/")
+    return JSONResponse({
+        "resource": base_url,
+        "authorization_servers": [base_url],
+    })
+
+
 async def oauth_metadata(request: Request) -> JSONResponse:
     """RFC 8414 OAuth authorization server metadata."""
     base_url = str(request.base_url).rstrip("/")
@@ -208,6 +217,7 @@ async def oauth_register(request: Request) -> JSONResponse:
 
 # Starlette routes to mount on the app
 oauth_routes = [
+    Route("/.well-known/oauth-protected-resource", oauth_protected_resource, methods=["GET"]),
     Route("/.well-known/oauth-authorization-server", oauth_metadata, methods=["GET"]),
     Route("/oauth/authorize", oauth_authorize, methods=["GET"]),
     Route("/oauth/token", oauth_token, methods=["POST"]),

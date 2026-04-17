@@ -38,6 +38,7 @@ mcp = FastMCP(
     stateless_http=True,
     json_response=True,
     lifespan=lifespan,
+    streamable_http_path="/",
     transport_security=TransportSecuritySettings(
         enable_dns_rebinding_protection=True,
         allowed_hosts=[
